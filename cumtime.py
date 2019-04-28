@@ -1,11 +1,12 @@
 import collections, time, contextlib, statistics, atexit
 
 
-def register(name):
-    Cumtime(name=name)
+def register(name, print_exit=False):
+    Cumtime(name=name, print_exit=print_exit)
+
 
 class Cumtime:
-    def __init__(self, print_exit=False, name=None):
+    def __init__(self, name=None, print_exit=False):
         self.reset()
         if print_exit:
             atexit.register(self.print)
