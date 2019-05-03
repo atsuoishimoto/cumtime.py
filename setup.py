@@ -8,40 +8,27 @@ from io import open
 
 here = path.abspath(path.dirname(__file__))
 
-# Get the long description from the README file
 with open(path.join(here, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
-# Arguments marked as "Required" below must be included for upload to PyPI.
-# Fields marked as "Optional" may be commented out.
-
 setup(
     name='cumtime',
-    version='0.2.0',  # Required
+    version='0.2.0',
 
     description='Cumulative measurement of execution time',
 
-    long_description=long_description,  # Optional
+    long_description=long_description,
 
-    long_description_content_type='text/markdown',  # Optional (see note above)
+    long_description_content_type='text/markdown',
 
-    url='https://github.com/atsuoishimoto/cumtime.py',  # Optional
+    url='https://github.com/atsuoishimoto/cumtime.py',
 
-    author='Atsuo Ishimoto',  # Optional
+    author='Atsuo Ishimoto',
 
-    classifiers=[  # Optional
-        # How mature is this project? Common values are
-        #   3 - Alpha
-        #   4 - Beta
-        #   5 - Production/Stable
+    classifiers=[
         'Development Status :: 5 - Production/Stable',
-
-        # Indicate who your project is intended for
         'Intended Audience :: Developers',
-
-        # Pick your license as you wish
         'License :: OSI Approved :: MIT License',
-
         'Programming Language :: Python :: 3',
     ],
 
@@ -52,7 +39,7 @@ setup(
     python_requires='>=3.6',
 
 
-    project_urls={  # Optional
+    project_urls={
         'Bug Reports': 'https://github.com/atsuoishimoto/cumtime.py/issues',
         'Source': 'https://github.com/atsuoishimoto/cumtime.py',
     },
