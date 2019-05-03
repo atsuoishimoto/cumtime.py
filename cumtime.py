@@ -1,5 +1,5 @@
 import collections, time, contextlib, statistics, atexit
-
+from functools import wraps
 
 def register(name, print_exit=False):
     Cumtime(name=name, print_exit=print_exit)
@@ -30,12 +30,38 @@ class Cumtime:
             if (not name) or (n == name):
                 break
 
-    @contextlib.contextmanager
-    def __call__(self, name):
-        self.begin(name)
-        yield self
-        self.end(name)
-        return
+    def __call__(self, name_or_func):
+        c = self
+        
+        if callable(name_or_func):
+            @wraps(name_or_func)
+            def wrapper(*args, **kwargs):
+                c.begin(name_or_func.__qualname__)
+                try:
+                    return name_or_func(*args, **kwargs)
+                finally:
+                    c.end(name_or_func.__qualname__)
+            return wrapper
+
+
+        class cumcontext:
+            def __enter__(self):
+                c.begin(name_or_func)
+
+            def __exit__(self, exc_type, exc_value, traceback):
+                c.end(name_or_func)
+
+            def __call__(self, func):
+                @wraps(func)
+                def wrapper(*args, **kwargs):
+                    c.begin(name_or_func)
+                    try:
+                        return func(*args, **kwargs)
+                    finally:
+                        c.end(name_or_func)
+                return wrapper
+
+        return cumcontext()
 
     def print(self, name=None):
         if name:
@@ -51,6 +77,7 @@ class Cumtime:
 
 
     def __str__(self):
-        return '\n'.join(self._str(n) for n in self._map)
+        names = sorted(self._map)
+        return '\n'.join(self._str(n) for n in names)
 
 

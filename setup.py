@@ -17,7 +17,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='cumtime',
-    version='0.1.0',  # Required
+    version='0.2.0',  # Required
 
     description='Cumulative measurement of execution time',
 
