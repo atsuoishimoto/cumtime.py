@@ -1,7 +1,7 @@
 import re, collections, time, contextlib, statistics, atexit
 from functools import wraps
 
-__version__ = '0.3.0'
+__version__ = '0.4.0'
 
 def register(name, print_exit=False):
     Cumtime(name=name, print_exit=print_exit)
@@ -94,7 +94,7 @@ class Cumtime:
 
         all = [(name, *self._calc(name)) for name in names]
         if sort_sum:
-            all.sort(key=lambda e: (e[1], e[0]))
+            all.sort(key=lambda e: (e[1], e[0]), reverse=True)
         else:
             all.sort(key=lambda e: e[0])
 
