@@ -12,7 +12,7 @@ time.sleep(0.01)
 cum.end()
 
 print(cum)
-# t1: sum: 0.02 n:2 ave:0.01'
+# t1: sum:0.02 n:2 ave:0.01'
 ```
 
 
